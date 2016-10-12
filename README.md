@@ -9,3 +9,4 @@ creating artwork with python and numpy
 ![p7.py](p7.png)
 ![p8.py](p8.png)
 ![p9.py](p9.png)
+![p10.py](p10.png)
