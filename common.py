@@ -22,8 +22,7 @@ def imwarp(im,fn,oob=clip):
     return warped 
 
 def imtile(im,shape):
-    rowrep,colrep=(math.ceil(shape[i]/im.shape[i]) for i in range(2))
-    im=np.kron(np.array([[1]*colrep]*rowrep,dtype=np.uint8),im)
+    im=np.kron(np.ones(tuple(int(0.5+shape[i]/im.shape[i]) for i in range(2)),dtype=np.uint8),im)
     return im[0:shape[0],0:shape[1]]
 
 def warp(x,y,twist,twist_offset,shape):
@@ -36,10 +35,8 @@ def warp(x,y,twist,twist_offset,shape):
 def checkerboard(shape,sqshape,inv=False):
     if isinstance(shape,(int,float))==1: shape=(int(shape),int(shape))
     if isinstance(sqshape,(int,float))==1: sqshape=(int(sqshape),int(sqshape))
-    w,b=int(not inv),int(inv)
-    pat=np.array([[w,b],[b,w]],dtype=np.uint8)
-    ones=np.ones(sqshape,dtype=np.uint8)
-    return imtile(np.kron(pat,ones),shape)
+    x,y=np.meshgrid(*map(range,shape[::-1]))
+    return (x//sqshape[1]%2)^(y//sqshape[0]%2)
 
 def box2(shape,delta):
     box=np.zeros(shape,dtype=np.uint8)
@@ -52,15 +49,19 @@ def boxN(shape,n):
         box=box^box2(shape,delta)
     return box
 
-def imshow(im):
-    im=im-np.min(im)
-    im=im*255/np.max(im)
+def imnormalize(im):
+    im-=np.min(im)
+    M=np.max(im)
+    if M>0: im=im*255/M
+    return im
+
+def imshow(im,normalize=True):
+    if normalize: im=imnormalize(im)
     im=Image.fromarray(np.float32(im))
     im.show()
 
-def imsave(im,filename):
-    im=im-np.min(im)
-    im=im*255/np.max(im)
+def imsave(im,filename,normalize=True):
+    if normalize: im=imnormalize(im)
     im=Image.fromarray(np.uint8(im))
     im.save(filename)
 
