@@ -2,10 +2,8 @@ from common import *
 s=256
 im=checkerboard(s,s//2)
 for i in range(6):
-    im[0,...]^=1
-    im[-1,...]^=1
-    im[...,0]^=1
-    im[...,-1]^=1
+    im[[0,-1],...]^=1
+    im[...,[0,-1]]^=1
     s//=2
     c=checkerboard(s,s//2)
     ch=imtile(c,(c.shape[0],im.shape[1]))
