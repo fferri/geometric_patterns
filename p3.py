@@ -1,13 +1,11 @@
 from common import *
 
 def spiral(shape,nbands=16,twist=0.1):
-    im=np.zeros(shape,dtype=np.uint8)
-    for i,j in all_coords(shape):
-        y,x=(i-0.5*shape[0],j-0.5*shape[1])
-        r=math.log(1+math.hypot(y,x))
-        a=math.atan2(y,x)
-        im[i,j]=1 if math.sin(a*nbands+r*twist)>0 else 0
-    return im
+    h,w=shape
+    x,y=np.meshgrid(range(w),range(h))
+    r=np.sqrt((x-w/2)**2+(y-h/2)**2)
+    a=np.arctan2(x-w/2,y-h/2)
+    return np.sin(np.log(1+r)*twist+a*nbands)>0
 
 imgsz=(2048,2048)
 s1,s2=(spiral(imgsz,16,16*i) for i in (1,-1))
