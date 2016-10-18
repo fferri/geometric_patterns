@@ -2,18 +2,33 @@ import math
 import numpy as np
 from PIL import Image
 
+class norm:
+    @staticmethod
+    def L1(x1,x2):
+        return np.abs(x1)+np.abs(x2)
+    @staticmethod
+    def L2(x1,x2):
+        return np.sqrt(x1**2+x2**2)
+    @staticmethod
+    def Linf(x1,x2):
+        return np.maximum(np.abs(x1),np.abs(x2))
+
+distance = norm
+
 def meshgrid_euclidean(shape):
     return np.meshgrid(*map(range,shape))
 
-def meshgrid_polar(shape,center=None,dist='L2'):
+def meshgrid_distance(shape,center=None,dist=distance.L2):
     y,x=meshgrid_euclidean(shape)
     if center is None: center=np.array(shape)/2
     y,x=y-center[0],x-center[1]
-    if dist == 'L1': r=np.abs(x)+np.abs(y)
-    elif dist == 'L2': r=np.sqrt(x**2+y**2)
-    elif dist == 'Linf': r=np.maximum(np.abs(x),np.abs(y))
-    a=np.arctan2(x,y)
-    return r,a
+    return dist(x,y)
+
+def meshgrid_polar(shape,center=None,dist=distance.L2):
+    y,x=meshgrid_euclidean(shape)
+    if center is None: center=np.array(shape)/2
+    y,x=y-center[0],x-center[1]
+    return dist(x,y),np.arctan2(x,y)
 
 def meshgrid_hyperbolic(shape):
     y,x=meshgrid_euclidean(shape)
@@ -53,10 +68,10 @@ def box2(shape,delta):
     return box
 
 def boxN(shape,n):
-    box=np.zeros(shape,dtype=np.uint8)
-    for delta in zip(range(0,shape[0]//2,shape[0]//2//n),range(0,shape[1]//2,shape[1]//2//n)):
-        box=box^box2(shape,delta)
-    return box
+    box=meshgrid_distance(shape,None,distance.Linf)
+    l=max(shape)//(n*2)
+    box=box//l%2
+    return np.uint8(box)
 
 def imnormalize(im):
     im-=np.min(im)
