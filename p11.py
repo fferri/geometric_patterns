@@ -1,8 +1,14 @@
 from common import *
+from functools import reduce
 
-x,y=np.meshgrid(range(512),range(512))
-r1=np.sqrt((x-384)**2+(y-384)**2)
-r2=np.sqrt((x-128)**2+(y-128)**2)
-im=np.sin(np.minimum(r1,r2)*math.pi/10)>0
+s=np.array((4096,4096))
+y,x=meshgrid_euclidean(s)
+pts=[]
+for (r,n,o) in ((0,1,0),(0.2,3,math.pi/6),(0.4,6,0)):
+    for a in range(n):
+        pts.append([getattr(math,f)(o+a*math.pi*2/n)*r+0.5 for f in ['cos','sin']])
+r=[np.sqrt((x-p[1]*s[1])**2+(y-p[0]*s[0])**2) for p in pts]
+r=reduce(np.minimum, r[1:], r[0])
+im=np.sin(r*math.pi/40)>0
 imshow(im)
 imsave(im,'p11.png')
