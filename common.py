@@ -2,6 +2,25 @@ import math
 import numpy as np
 from PIL import Image
 
+def meshgrid_euclidean(shape):
+    return np.meshgrid(*map(range,shape))
+
+def meshgrid_polar(shape,center=None,dist='L2'):
+    y,x=meshgrid_euclidean(shape)
+    if center is None: center=np.array(shape)/2
+    y,x=y-center[0],x-center[1]
+    if dist == 'L1': r=np.abs(x)+np.abs(y)
+    elif dist == 'L2': r=np.sqrt(x**2+y**2)
+    elif dist == 'Linf': r=np.maximum(np.abs(x),np.abs(y))
+    a=np.arctan2(x,y)
+    return r,a
+
+def meshgrid_hyperbolic(shape):
+    y,x=meshgrid_euclidean(shape)
+    u=0.5*(np.log(x+1)-np.log(y+1))
+    v=np.sqrt(x*y)
+    return u,v
+
 def all_coords(shape):
     for i in range(shape[0]):
         for j in range(shape[1]):
@@ -35,7 +54,7 @@ def warp(x,y,twist,twist_offset,shape):
 def checkerboard(shape,sqshape,inv=False):
     if isinstance(shape,(int,float))==1: shape=(int(shape),int(shape))
     if isinstance(sqshape,(int,float))==1: sqshape=(int(sqshape),int(sqshape))
-    x,y=np.meshgrid(*map(range,shape[::-1]))
+    y,x=np.meshgrid(*map(range,shape))
     return (x//sqshape[1]%2)^(y//sqshape[0]%2)
 
 def box2(shape,delta):
