@@ -15,8 +15,10 @@ def square_spiral(shape,num_cycles):
 
 s=square_spiral((4,4),10)
 s1=1-s.T[...,::-1]
-s2=s1.T[...,::-1]
+s2=s1[::-1,::-1]
+s2=s2[...,5:]
 q=np.hstack((s1,s2))
+q[-4:,...]=1
 q=np.vstack((q,q[...,::-1]))
 im=imtile(q,np.array(q.shape)*10)
 imshow(im)
