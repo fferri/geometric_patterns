@@ -1,10 +1,7 @@
 from common import *
 
 def spiral(shape,nbands=16,twist=0.1):
-    h,w=shape
-    x,y=np.meshgrid(range(w),range(h))
-    r=np.sqrt((x-w/2)**2+(y-h/2)**2)
-    a=np.arctan2(x-w/2,y-h/2)
+    r,a=meshgrid_polar(shape)
     return np.sin(np.log(1+r)*twist+a*nbands)>0
 
 imgsz=(2048,2048)
