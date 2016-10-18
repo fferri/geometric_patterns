@@ -2,10 +2,10 @@ from common import *
 
 def radial_warp(i,j):
     cx,cy=imgsz/2
-    a,r=math.atan2(i-cy,j-cx),math.hypot(i-cy,j-cx)
+    a,r=np.arctan2(i-cy,j-cx),np.sqrt((i-cy)**2+(j-cx)**2)
     a=a*6/4
-    r=r*math.sin(1000/(1+r))
-    return cx+math.cos(a)*r,cy+math.sin(a)*r
+    r=r*np.sin(1000/(1+r))
+    return cx+np.cos(a)*r,cy+np.sin(a)*r
 
 s=256
 im=checkerboard(s,s//2)
