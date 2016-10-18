@@ -10,3 +10,6 @@ creating artwork with python and numpy
 <img src="p8.png" width="640" />
 <img src="p9.png" width="640" />
 <img src="p10.png" width="640" />
+<img src="p11.png" width="640" />
+<img src="p12.png" width="640" />
+<img src="p13.png" width="640" />
