@@ -22,4 +22,4 @@ q[-4:,...]=1
 q=np.vstack((q,q[...,::-1]))
 im=imtile(q,np.array(q.shape)*10)
 imshow(im)
-imsave(im,'p4.png')
+imsave(im,'p04.png')

@@ -1,14 +1,14 @@
 # geometric_patterns
 creating artwork with python and numpy
-<img src="p1.png" width="640" />
-<img src="p2.png" width="640" />
-<img src="p3.png" width="640" />
-<img src="p4.png" width="640" />
-<img src="p5.png" width="640" />
-<img src="p6.png" width="640" />
-<img src="p7.png" width="640" />
-<img src="p8.png" width="640" />
-<img src="p9.png" width="640" />
+<img src="p01.png" width="640" />
+<img src="p02.png" width="640" />
+<img src="p03.png" width="640" />
+<img src="p04.png" width="640" />
+<img src="p05.png" width="640" />
+<img src="p06.png" width="640" />
+<img src="p07.png" width="640" />
+<img src="p08.png" width="640" />
+<img src="p09.png" width="640" />
 <img src="p10.png" width="640" />
 <img src="p11.png" width="640" />
 <img src="p12.png" width="640" />

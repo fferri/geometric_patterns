@@ -10,4 +10,4 @@ for i in range(6):
     cv=checkerboard((im.shape[0]+2*s,s),s//k)
     im=np.hstack((1-cv,np.vstack((ch,im,1-ch)),cv))
 imshow(im)
-imsave(im,'p1.png')
+imsave(im,'p01.png')
