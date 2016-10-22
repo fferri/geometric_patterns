@@ -16,3 +16,4 @@ creating artwork with python and numpy
 <img src="p14.png" width="640" />
 <img src="p15.png" width="640" />
 <img src="p16.png" width="640" />
+<img src="p17.png" width="640" />
