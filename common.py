@@ -80,12 +80,35 @@ def imnormalize(im):
     return im
 
 def imshow(im,normalize=True):
-    if normalize: im=imnormalize(im)
-    im=Image.fromarray(np.float32(im))
+    if len(im.shape)==2:
+        if normalize: im=imnormalize(im)
+        im=np.float32(im)
+    if len(im.shape)==3 and im.shape[2]==3:
+        im=np.uint8(im)
+    im=Image.fromarray(im)
     im.show()
 
 def imsave(im,filename,normalize=True):
-    if normalize: im=imnormalize(im)
+    if len(im.shape)==2:
+        if normalize: im=imnormalize(im)
     im=Image.fromarray(np.uint8(im))
     im.save(filename)
+
+def apply_colormap(im,cmap,prenormalize=True):
+    if cmap.shape != (256,3): raise ValueError('colormap must be 256x3 uint8 values')
+    if prenormalize: im=imnormalize(im)
+    return cmap[np.uint8(im.reshape(-1))].reshape(im.shape+(3,))
+
+def make_colormap(colors,positions=None):
+    if positions is None: positions=np.uint8(np.linspace(0,255,len(colors)))
+    colors=np.array(colors)
+    if colors.shape[1] != 3: raise ValueError('colors must be Nx3 uint8 values')
+    if len(positions) != colors.shape[0]: raise ValueError('positions must be an array of %d floating point values' % colors.shape[0])
+    if any(pos < 0 or pos > 255 for pos in positions): raise ValueError('positions must be between 0 and 255')
+    cmap=np.zeros((256,3), dtype=np.uint8)
+    for c1,c2,p1,p2 in zip(colors,colors[1:],positions,positions[1:]):
+        for i in range(p1,p2+1):
+            x=(i-p1)/(p2-p1)
+            cmap[i,:]=c1*(1-x)+c2*x
+    return np.uint8(cmap)
 
