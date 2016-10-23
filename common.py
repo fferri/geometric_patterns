@@ -43,7 +43,7 @@ def cycle(x,xmax):
     return np.fmod(-np.minimum(0,np.ceil(x/xmax))*xmax+x,xmax)
 
 def imwarp(im,fn,oob=clip):
-    warped=np.zeros(im.shape,dtype=np.uint8)
+    warped=np.zeros_like(im)
     i,j=meshgrid_euclidean(im.shape)
     h,k=fn(i,j)
     h,k=oob(h,im.shape[0]),oob(k,im.shape[1])
