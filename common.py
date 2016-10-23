@@ -95,6 +95,7 @@ def imsave(im,filename,normalize=True):
     im.save(filename)
 
 def apply_colormap(im,cmap,prenormalize=True):
+    if callable(cmap): cmap=cmap()
     if cmap.shape != (256,3): raise ValueError('colormap must be 256x3 uint8 values')
     if prenormalize: im=imnormalize(im)
     return cmap[np.uint8(im.reshape(-1))].reshape(im.shape+(3,))
@@ -111,4 +112,11 @@ def make_colormap(colors,positions=None):
             x=(i-p1)/(p2-p1)
             cmap[i,:]=c1*(1-x)+c2*x
     return np.uint8(cmap)
+
+class colormap:
+    @staticmethod
+    def rainbow():
+        cc=[[255,0,0],[255,255,0],[0,255,0],[0,255,255],[0,0,255],[255,0,255],[255,0,0]]
+        pp=[0,25,76,127,178,229,255]
+        return make_colormap(cc,pp)
 
