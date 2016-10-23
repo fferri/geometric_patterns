@@ -124,4 +124,20 @@ class colormap:
         cc=[[0,0,255],[0,255,255],[130,255,130],[255,255,10],[255,0,0],[130,0,0]]
         pp=[0,95,125,160,235,255]
         return make_colormap(cc,pp)
+    @staticmethod
+    def hot():
+        cc=[[0,0,0],[255,0,0],[255,255,0],[255,255,255]]
+        pp=[0,95,185,255]
+        return make_colormap(cc,pp)
+    @staticmethod
+    def cold():
+        cc=[[0,0,0],[0,0,255],[0,255,255],[255,255,255]]
+        pp=[0,95,185,255]
+        return make_colormap(cc,pp)
+    @staticmethod
+    def contours(n,w=1):
+        cmap=np.zeros((256,3), dtype=np.uint8)
+        for p in np.linspace(0,255,2+n)[1:-1]:
+            cmap[int(p-w/2):int(p+w/2)+1,:]=[255,255,255]
+        return cmap
 
