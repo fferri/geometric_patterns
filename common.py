@@ -120,6 +120,13 @@ class colormap:
         pp=[0,25,76,127,178,229,255]
         return make_colormap(cc,pp)
     @staticmethod
+    def rainbow2(offset=0.0):
+        cmap=np.zeros((256,3), dtype=np.uint8)
+        for i in range(256):
+            for j in range(3):
+                cmap[i,j]=127.5*(1+math.cos(offset+math.pi*(i*2/255-2*j/3+0)))
+        return cmap
+    @staticmethod
     def jet():
         cc=[[0,0,255],[0,255,255],[130,255,130],[255,255,10],[255,0,0],[130,0,0]]
         pp=[0,95,125,160,235,255]
