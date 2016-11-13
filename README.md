@@ -23,3 +23,5 @@ creating artwork with python and numpy
 <img src="p21.png" width="640" />
 <img src="p22.png" width="640" />
 <img src="p23.png" width="640" />
+<img src="p24.png" width="640" />
+<img src="p25.png" width="640" />
