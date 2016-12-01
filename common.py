@@ -52,6 +52,15 @@ def imwarp(im,fn,oob=clip):
     warped[i,j]=im[h,k]
     return warped 
 
+def imblt(im,op,x,y,srcim,srcx1=0,srcy1=0,srcx2=None,srcy2=None):
+    srcimsub=srcim[srcy1:srcy2,srcx1:srcx2]
+    im[y:y+srcimsub.shape[0],x:x+srcimsub.shape[1]]=op(im[y:y+srcimsub.shape[0],x:x+srcimsub.shape[1]],srcimsub)
+
+def imcircle(im,x,y,r):
+    x,y,r=map(int,(x,y,r))
+    s=meshgrid_distance((2*r,)*2)<=r
+    imblt(im,np.maximum,int(x-r),int(y-r),s)
+
 def imtile(im,shape):
     im=np.kron(np.ones(tuple(int(0.5+shape[i]/im.shape[i]) for i in range(2)),dtype=np.uint8),im)
     return im[0:shape[0],0:shape[1]]
@@ -93,6 +102,12 @@ def imsave(im,filename,normalize=True):
         if normalize: im=imnormalize(im)
     im=Image.fromarray(np.uint8(im))
     im.save(filename)
+
+def imload(filename):
+    im=Image.open(filename)
+    arr=np.asarray(im.getdata())
+    arr.resize(im.height, im.width, 3)
+    return arr
 
 def apply_colormap(im,cmap,prenormalize=True):
     if callable(cmap): cmap=cmap()
