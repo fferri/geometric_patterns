@@ -1,8 +1,7 @@
 from common import *
 from functools import reduce
 
-for t in range(10000):
-    print('rendering frame %08d...'%t)
+def draw(t=0, *args):
     s=np.array((2048,2048))
     y,x=meshgrid_euclidean(s)
     pts=[]
@@ -12,4 +11,10 @@ for t in range(10000):
     r=[np.sqrt((x-p[1]*s[1])**2+(y-p[0]*s[0])**2) for p in pts]
     r=reduce(np.minimum, r[1:], r[0])
     im=np.sin(r*math.pi/(40+10*math.sin(0.43586+0.006342*t)))>0
-    imsave(im,'video2-%08d.png'%t)
+    return im
+
+if __name__ == '__main__':
+    for t in range(10000):
+        print('rendering frame %08d...'%t)
+        im=draw(t)
+        imsave(im,'video2-%08d.png'%t)

@@ -17,11 +17,16 @@ imgsz=(1024,1024)
 s1,s2=(spiral(imgsz,6,32*i) for i in (-1,1))
 im=s1*s2
 
-for t in range(4000):
-    print('rendering frame %08d...'%t)
+def draw(t=0, *args):
     a=t*0.008
     r=0.2+0.15*math.sin(a*3)
     im2=imwarp(im,kaleidoscope(0.5+r*math.sin(a),0.5+r*math.cos(a)))
     im2=apply_colormap(im2,colormap.jet)
-    imsave(im2,'video4-%08d.png'%t)
+    return im2
+
+if __name__ == '__main__':
+    for t in range(4000):
+        print('rendering frame %08d...'%t)
+        im2=draw(t)
+        imsave(im2,'video4-%08d.png'%t)
 

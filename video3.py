@@ -11,7 +11,12 @@ def radial_warp(t):
 
 imgsz=np.array([2*1024]*2)
 im=checkerboard(imgsz, imgsz//16)
-for t in range(4000):
-    print('rendering frame %08d...'%t)
-    im1=imwarp(im,radial_warp(t),cycle)
-    imsave(im1,'video3-%08d.png'%t)
+
+def draw(t=0, *args):
+    return imwarp(im,radial_warp(t),cycle)
+
+if __name__ == '__main__':
+    for t in range(4000):
+        print('rendering frame %08d...'%t)
+        im1=draw(t)
+        imsave(im1,'video3-%08d.png'%t)
