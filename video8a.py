@@ -6,7 +6,7 @@ im=np.float32(np.uint8(np.log(1+r)*4%2)^np.uint8(np.sin(a*16)>0))
 
 im2=im
 
-def draw(t=0, *args):
+def draw(t=0, **kwargs):
     # fast box blur:
     for n in (19,):
         for axis in range(2):

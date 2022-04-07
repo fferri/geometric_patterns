@@ -2,7 +2,7 @@ from common import *
 
 # "the flower of life"
 
-def draw(*args):
+def draw(**kwargs):
     imgsz=(2048,)*2
     r0=imgsz[0]*0.124
     xy=set([(0,0,0)])

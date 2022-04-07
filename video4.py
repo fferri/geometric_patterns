@@ -17,7 +17,7 @@ imgsz=(1024,1024)
 s1,s2=(spiral(imgsz,6,32*i) for i in (-1,1))
 im=s1*s2
 
-def draw(t=0, *args):
+def draw(t=0, **kwargs):
     a=t*0.008
     r=0.2+0.15*math.sin(a*3)
     im2=imwarp(im,kaleidoscope(0.5+r*math.sin(a),0.5+r*math.cos(a)))

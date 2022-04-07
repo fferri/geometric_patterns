@@ -1,6 +1,6 @@
 from common import *
 
-def draw(*args):
+def draw(**kwargs):
     s=256
     im=checkerboard(s,s//2)
     for i in range(6):

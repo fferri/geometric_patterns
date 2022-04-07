@@ -2,7 +2,7 @@ from common import *
 
 # floor tiles
 
-def draw(*args):
+def draw(**kwargs):
     imgsz=(2048,)*2
     x,y=meshgrid_euclidean(imgsz)
     s=lambda x: np.sin(math.pi*x)

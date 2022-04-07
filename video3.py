@@ -12,7 +12,7 @@ def radial_warp(t):
 imgsz=np.array([2*1024]*2)
 im=checkerboard(imgsz, imgsz//16)
 
-def draw(t=0, *args):
+def draw(t=0, **kwargs):
     return imwarp(im,radial_warp(t),cycle)
 
 if __name__ == '__main__':

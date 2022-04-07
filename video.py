@@ -11,7 +11,7 @@ def radial_warp(t,imgsz):
         return cx+np.cos(a)*r,cy+np.sin(a)*r
     return f
 
-def draw(t=0, *args):
+def draw(t=0, **kwargs):
     imgsz=np.array([2*1024]*2)
     global im
     if im is None:

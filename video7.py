@@ -3,7 +3,7 @@ from common import *
 imgsz=(1280,800)
 r,a=meshgrid_polar(imgsz)
 
-def draw(t=0, *args):
+def draw(t=0, **kwargs):
     h=t*math.pi*2/100
     im=3*(3*np.log(1+r))+5*np.sin(a*8+16*np.log(1+r))
     im=apply_colormap(im,colormap.rainbow2(h))

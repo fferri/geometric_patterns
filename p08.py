@@ -3,7 +3,7 @@ from common import *
 # 2-sides checkerboard
 
 
-def draw(*args):
+def draw(**kwargs):
     imgsz=np.array([2*1024]*2)
     def radial_warp(i,j):
         cx,cy=imgsz/2

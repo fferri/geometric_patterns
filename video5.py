@@ -5,7 +5,7 @@ from common import *
 imgsz=(1280,800)
 y,x=meshgrid_euclidean(imgsz)
 
-def draw(t=0, *args):
+def draw(t=0, **kwargs):
     cx1,cy1=x-imgsz[1]*0.5*(1+math.cos(t*0.01)),y-imgsz[0]*0.5*(1+math.sin(t*0.01))
     v1=np.sin(np.sqrt(cx1**2+cy1**2)/imgsz[0]*12+t*0.0354837)
     v2=np.sin(9*(1+0.4*math.sin(t*0.04566))*x/imgsz[1]*math.sin(t*0.01)+7*(1+0.6*math.cos(t*0.0463))*y/imgsz[0]*math.cos(t*0.00784)+t*0.0295528)

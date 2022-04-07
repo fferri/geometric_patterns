@@ -2,7 +2,7 @@ from common import *
 
 # inspired by a Aldous Huxley's book cover
 
-def draw(*args):
+def draw(**kwargs):
     imgsz=(2048,)*2
     r,a=meshgrid_polar(imgsz)
     im=np.fmod(np.float32(3.5*np.log(1+r))+2*np.power(np.abs(np.sin(8*np.float32(a))),0.4),1.4)

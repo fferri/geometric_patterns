@@ -2,7 +2,7 @@ from common import *
 
 # hyperbolic coords checkerboard
 
-def draw(*args):
+def draw(**kwargs):
     w,h=2048,2048
     u,v=meshgrid_hyperbolic((w,h))
     u=np.uint(u*10)%2

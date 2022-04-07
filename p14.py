@@ -1,6 +1,6 @@
 from common import *
 
-def draw(*args):
+def draw(**kwargs):
     imgsz=np.array([2*1024]*2)
     r,a=meshgrid_polar(imgsz,dist=distance.L2)
     r=np.uint(7*np.log(1+r))

@@ -1,6 +1,6 @@
 from common import *
 
-def draw(*args):
+def draw(**kwargs):
     w,h=2048,2048
     x,y=np.meshgrid(range(w),range(h))
     r=np.sqrt((x-w/2)**2+(y-h/2)**2)

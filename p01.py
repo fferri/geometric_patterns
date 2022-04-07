@@ -1,6 +1,6 @@
 from common import *
 
-def draw(*args):
+def draw(**kwargs):
     s=2**9
     k=2 # try 1, 2, 3...
 

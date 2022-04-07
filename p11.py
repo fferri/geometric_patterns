@@ -1,7 +1,7 @@
 from common import *
 from functools import reduce
 
-def draw(*args):
+def draw(**kwargs):
     s=np.array((4096,4096))
     y,x=meshgrid_euclidean(s)
     pts=[]

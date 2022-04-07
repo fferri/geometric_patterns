@@ -1,6 +1,6 @@
 from common import *
 
-def draw(*args):
+def draw(**kwargs):
     sq=np.array((256,)*2)
     imgsz=sq*6
     k=8 # try 128

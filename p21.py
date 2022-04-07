@@ -1,6 +1,6 @@
 from common import *
 
-def draw(*args):
+def draw(**kwargs):
     sq=np.array((64,)*2)
     imgsz=sq*32
     h,v=map(lambda im: im//sq[0]%2, meshgrid_euclidean(imgsz))

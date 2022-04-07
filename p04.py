@@ -13,7 +13,7 @@ def square_spiral(shape,num_cycles):
         im=im.T
     return im
 
-def draw(*args):
+def draw(**kwargs):
     s=square_spiral((4,4),10)
     s1=1-s.T[...,::-1]
     s2=s1[::-1,::-1]

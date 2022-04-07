@@ -3,7 +3,7 @@ from common import *
 imgsz=(2048,)*2
 r,a=meshgrid_polar(imgsz)
 
-def draw(t=0, *args):
+def draw(t=0, **kwargs):
     discs=np.uint8(np.log(1+r)*4%2)
     bands=np.uint8(np.sin(a*16+0.1*t-np.log(1+r)*t)>0)
     im2=np.float32(discs^bands)
