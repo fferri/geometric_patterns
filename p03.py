@@ -1,10 +1,8 @@
 from common import *
-from time import time
 
 def spiral(shape,nbands=16,twist=0.1):
-    t=time()
     r,a=meshgrid_polar(shape)
-    return np.sin(0.2*t+np.log(1+r)*twist+a*nbands)>0
+    return np.sin(np.log(1+r)*twist+a*nbands)>0
 
 def draw(**kwargs):
     imgsz=(1024,1024)
